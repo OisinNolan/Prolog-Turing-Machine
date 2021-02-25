@@ -10,6 +10,9 @@ TODO:
     - Remove this todo list :)
 
 */
+/* @authors: Oisin Nolan - 00000000, Sophie Crowley - 00000000, Madeleine Comtois -17301720
+ * @version: 25/02/2021
+ */
 
 % MoveRight if R is empty []
 transition(_, MoveRight, _, L, [TapeInput|[]], Q, [TapeInput|L], [b-k], Qn) :-
@@ -62,3 +65,26 @@ accept(MoveLeft, MoveRight, Write, Halt, [[L, R, Q]|Rest], Output) :-
 % nTm(+move-right,+move-left,+write-list,+halt-list,+input,?output)
 nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
     accept(MoveLeft, MoveRight, Write, Halt, [[[],Input,q0]], Output).
+
+
+
+/** <examples>
+
+?- nTm([],[],[],[[q0,X]],[b-k,i,n,b-k,p,u,t,b-k,b-k],Out).
+
+?- nTm([[q1,1,q2],[q1,0,q2],[q1,b-k,q2]],[],
+         [[q0,0,1,q1], [q2,0,b-k,q1]],
+         [[q1,b-k]],
+         [0,0,0,0,0],
+         Out).
+         
+?- nTm([[mr1,h,we],[mr1,e,wl],[mr1,l,wp],[mr1,p,hbk],
+          [mr,l,wo],[mr,o,wo],[mp,o,wp]],
+         [[q0,0,lbk],[lbk,b-k,lbk]],
+         [[q0,0,h,mr1],[we,1,e,mr1],[wl,0,l,mr1],[wp,1,p,mr1],
+          [q0,0,l,mr],[wo,1,o,mr],[wo,0,o,mp]],
+         [[hbk,b-k]],
+         [0,1,0,1],
+         Output).
+
+*/
