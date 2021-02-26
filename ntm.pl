@@ -1,33 +1,32 @@
 /*
-
 TODO:
-    - Add more comments
-    - Change 'accept' predicate to be 'ntm' predicate
-    - Add solutions in comments for sample inputs given in assignment
-    - Better variable names?
-    - Better way to handle b-k symbol on tape
-    - Add our names somewhere
-    - Remove this todo list :)
+    - ☐ Add more comments
+    - ☒ Change 'accept' predicate to be 'ntm' predicate
+    - ☐ Add solutions in comments for sample inputs given in assignment
+    - ☐ Better variable names?
+    - ☐ Better way to handle b-k symbol on tape
+    - ☑ Add our names somewhere
+    - ☐ Remove this todo list :)
 
 */
-/* @authors: Oisin Nolan - 00000000, Sophie Crowley - 00000000, Madeleine Comtois -17301720
+/* @authors: Oisin Nolan - 00000000, Sophie Crowley - 17330036, Madeleine Comtois -17301720
  * @version: 25/02/2021
  */
 
 % MoveRight if R is empty []
-transition(_, MoveRight, _, L, [TapeInput|[]], Q, [TapeInput|L], [b-k], Qn) :-
+transition(MoveRight, _, _, L, [TapeInput|[]], Q, [TapeInput|L], [b-k], Qn) :-
     member([Q, TapeInput, Qn], MoveRight).
 
 % MoveRight
-transition(_, MoveRight, _, L, [TapeInput|T], Q, [TapeInput|L], T, Qn) :-
+transition(MoveRight, _, _, L, [TapeInput|T], Q, [TapeInput|L], T, Qn) :-
     member([Q, TapeInput, Qn], MoveRight).
 
 % MoveLeft if L is empty []
-transition(MoveLeft, _, _, [H|[]], [TapeInput|R], Q, [b-k], [H,TapeInput|R], Qn) :-
+transition(_, MoveLeft, _, [H|[]], [TapeInput|R], Q, [b-k], [H,TapeInput|R], Qn) :-
     member([Q, TapeInput, Qn], MoveLeft).
 
 % MoveLeft
-transition(MoveLeft, _, _, [H|T], [TapeInput|R], Q, T, [H,TapeInput|R], Qn) :-
+transition(_, MoveLeft, _, [H|T], [TapeInput|R], Q, T, [H,TapeInput|R], Qn) :-
     member([Q, TapeInput, Qn], MoveLeft).
 
 % Write
@@ -57,14 +56,14 @@ accept(_, _, _, Halt, [[L, [H|T], Q]|_], Output) :-
     remove_blanks_from_left(Reversed_Output, Reverse_No_R_Blanks_Output),
     reverse(Reverse_No_R_Blanks_Output, Output, []).
 
-accept(MoveLeft, MoveRight, Write, Halt, [[L, R, Q]|Rest], Output) :-
-    findall([Ln, Rn, Qn], transition(MoveLeft, MoveRight, Write, L, R, Q, Ln, Rn, Qn), Children),
+accept(MoveRight, MoveLeft, Write, Halt, [[L, R, Q]|Rest], Output) :-
+    findall([Ln, Rn, Qn], transition(MoveRight, MoveLeft, Write, L, R, Q, Ln, Rn, Qn), Children),
     add2frontier(Children, Rest, NewFrontier),
-	accept(MoveLeft, MoveRight, Write, Halt, NewFrontier, Output).
+	accept(MoveRight, MoveLeft, Write, Halt, NewFrontier, Output).
 
 % nTm(+move-right,+move-left,+write-list,+halt-list,+input,?output)
 nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
-    accept(MoveLeft, MoveRight, Write, Halt, [[[],Input,q0]], Output).
+    accept(MoveRight, MoveLeft, Write, Halt, [[[],Input,q0]], Output).
 
 
 
