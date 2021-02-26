@@ -4,7 +4,7 @@ TODO:
     - ☒ Change 'accept' predicate to be 'ntm' predicate
     - ☐ Add solutions in comments for sample inputs given in assignment
     - ☐ Better variable names?
-    - ☐ Better way to handle b-k symbol on tape
+    - ☑ Better way to handle b-k symbol on tape
     - ☑ Add our names somewhere
     - ☐ Remove this todo list :)
 
@@ -13,17 +13,9 @@ TODO:
  * @version: 25/02/2021
  */
 
-% MoveRight if R is empty []
-transition(MoveRight, _, _, L, [TapeInput|[]], Q, [TapeInput|L], [b-k], Qn) :-
-    member([Q, TapeInput, Qn], MoveRight).
-
 % MoveRight
 transition(MoveRight, _, _, L, [TapeInput|T], Q, [TapeInput|L], T, Qn) :-
     member([Q, TapeInput, Qn], MoveRight).
-
-% MoveLeft if L is empty []
-transition(_, MoveLeft, _, [H|[]], [TapeInput|R], Q, [b-k], [H,TapeInput|R], Qn) :-
-    member([Q, TapeInput, Qn], MoveLeft).
 
 % MoveLeft
 transition(_, MoveLeft, _, [H|T], [TapeInput|R], Q, T, [H,TapeInput|R], Qn) :-
@@ -63,7 +55,8 @@ accept(MoveRight, MoveLeft, Write, Halt, [[L, R, Q]|Rest], Output) :-
 
 % nTm(+move-right,+move-left,+write-list,+halt-list,+input,?output)
 nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
-    accept(MoveRight, MoveLeft, Write, Halt, [[[],Input,q0]], Output).
+    append(Input, [b-k], NewInput),
+    accept(MoveRight, MoveLeft, Write, Halt, [[[],NewInput,q0]], Output).
 
 
 
