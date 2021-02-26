@@ -4,7 +4,7 @@ TODO:
     - ☒ Change 'accept' predicate to be 'ntm' predicate
     - ☐ Add solutions in comments for sample inputs given in assignment
     - ☐ Better variable names?
-    - ☑ Better way to handle b-k symbol on tape
+    - ☐ Better way to handle b-k symbol on tape
     - ☑ Add our names somewhere
     - ☐ Remove this todo list :)
 
@@ -56,7 +56,7 @@ accept(MoveRight, MoveLeft, Write, Halt, [[L, R, Q]|Rest], Output) :-
 % nTm(+move-right,+move-left,+write-list,+halt-list,+input,?output)
 nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
     append(Input, [b-k], NewInput),
-    accept(MoveRight, MoveLeft, Write, Halt, [[[],NewInput,q0]], Output).
+    accept(MoveRight, MoveLeft, Write, Halt, [[[b-k],NewInput,q0]], Output).
 
 
 
