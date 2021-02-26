@@ -1,10 +1,11 @@
 /*
+
 TODO:
     - ☐ Add more comments
     - ☒ Change 'accept' predicate to be 'ntm' predicate
-    - ☐ Add solutions in comments for sample inputs given in assignment
+    - ☑ Add solutions in comments for sample inputs given in assignment
     - ☐ Better variable names?
-    - ☐ Better way to handle b-k symbol on tape
+    - ☑ Better way to handle b-k symbol on tape
     - ☑ Add our names somewhere
     - ☐ Remove this todo list :)
 
@@ -64,12 +65,26 @@ nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
 
 ?- nTm([],[],[],[[q0,X]],[b-k,i,n,b-k,p,u,t,b-k,b-k],Out).
 
+Solution:
+    Out = [i, n, b-k, p, u, t],
+    X = b-k
+    false
+
+
 ?- nTm([[q1,1,q2],[q1,0,q2],[q1,b-k,q2]],[],
          [[q0,0,1,q1], [q2,0,b-k,q1]],
          [[q1,b-k]],
          [0,0,0,0,0],
          Out).
-         
+
+Solution:
+    Out = [1, b-k, 0, 0, 0]
+    Out = [1, b-k, b-k, 0, 0]
+    Out = [1, b-k, b-k, b-k, 0]
+    Out = [1]
+    false        
+
+
 ?- nTm([[mr1,h,we],[mr1,e,wl],[mr1,l,wp],[mr1,p,hbk],
           [mr,l,wo],[mr,o,wo],[mp,o,wp]],
          [[q0,0,lbk],[lbk,b-k,lbk]],
@@ -78,5 +93,10 @@ nTm(MoveRight, MoveLeft, Write, Halt, Input, Output) :-
          [[hbk,b-k]],
          [0,1,0,1],
          Output).
+
+Solution:
+    Output = [h, e, l, p]
+    Output = [l, o, o, p]
+    false
 
 */
