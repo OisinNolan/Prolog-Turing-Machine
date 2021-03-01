@@ -1,16 +1,4 @@
-/*
-
-TODO:
-    - ☐ Add more comments
-    - ☒ Change 'accept' predicate to be 'ntm' predicate
-    - ☑ Add solutions in comments for sample inputs given in assignment
-    - ☐ Better variable names?
-    - ☑ Better way to handle b-k symbol on tape
-    - ☑ Add our names somewhere
-    - ☐ Remove this todo list :)
-
-*/
-/* @authors: Oisin Nolan - 00000000, Sophie Crowley - 17330036, Madeleine Comtois -17301720
+/* @authors: Oisin Nolan - 17327530, Sophie Crowley - 17330036, Madeleine Comtois -17301720
  * @version: 25/02/2021
  */
 
